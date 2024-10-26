@@ -26,7 +26,7 @@ const getTokenMetadataByAI = async () => {
         max_tokens: 100,
         messages: [{
             role: 'system',
-            content: `Using the provided schema, create metadata for a cute dog-themed token. I want this token to have an adorable and playful vibe, while still implying that it’s a fun and quirky way to generate value. Avoid directly copying existing projects like Dogecoin or Shiba Inu. The token name should convey a sense of joy and charm, as if it's backed by a cute dog's endless energy.
+            content: `Using the provided schema, create metadata for a token inspired by an animal taped to a wall with duct tape. The token name should convey a sense of charm and humor, capturing the quirky appeal of an animal in such an unusual situation.
 
             Make sure the description is fun, slightly silly, and no more than 15 words. At the end of the description, The name should sound lovable and fit within the following schema: 
             
@@ -37,7 +37,8 @@ const getTokenMetadataByAI = async () => {
             }
             
             Where name can contain a maximum of 32 characters, symbol can contain a maximum of 6 characters, and description can contain a maximum of 100 characters. Symbol should be an abbreviation of name.
-            Return only json object.
+            Return only json object
+
             `
         }],
     })
