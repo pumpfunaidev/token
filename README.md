@@ -1,6 +1,8 @@
 # X
 I will update X link here and burn all dev supply when it hit raydium
 
+https://x.com/DTDD_Solana/status/1850227233694392654
+
 # Hear Me Out
 
 Tired of the usual AI project hype? So are we.
