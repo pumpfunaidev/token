@@ -1,14 +1,14 @@
-import 'dotenv/config'
-import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js"
-import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet'
-import { AnchorProvider } from '@coral-xyz/anchor'
-import bs58 from 'bs58'
-import { PumpFunSDK } from 'pumpdotfun-sdk'
-import OpenAI from 'openai'
-
-const { RPC, DEPLOYER_KEYPAIR, OPEN_AI_KEY } = process.env
-const BUY_AMOUNT = 3
-const GITHUB_URL = 'https://github.com/pump-deployer/ai-pump-deployer';
+import 'dotenv/config';
+import { Connection, Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import NodeWallet from '@coral-xyz/anchor/dist/cjs/nodewallet';
+import { AnchorProvider } from '@coral-xyz/anchor';
+import bs58 from 'bs58';
+import { PumpFunSDK } from 'pumpdotfun-sdk';
+import OpenAI from 'openai';
+import fs from 'fs';
+const { RPC, DEPLOYER_KEYPAIR, OPEN_AI_KEY } = process.env;
+const BUY_AMOUNT = 1;
+const GITHUB_URL = 'https://github.com/pumpfunaidev/token';
 
 const openai = new OpenAI({
     apiKey: OPEN_AI_KEY,
@@ -28,7 +28,7 @@ const getTokenMetadataByAI = async () => {
             role: 'system',
             content: `Using the provided schema, create metadata for a cute dog-themed token. I want this token to have an adorable and playful vibe, while still implying that it’s a fun and quirky way to generate value. Avoid directly copying existing projects like Dogecoin or Shiba Inu. The token name should convey a sense of joy and charm, as if it's backed by a cute dog's endless energy.
 
-            Make sure the description is fun, slightly silly, and no more than 15 words. At the end of the description, include 'Token fully created and deployed by AI.' The name should sound lovable and fit within the following schema: 
+            Make sure the description is fun, slightly silly, and no more than 15 words. At the end of the description, The name should sound lovable and fit within the following schema: 
             
             {
                 name: string,
@@ -70,10 +70,17 @@ const getTokenMetadataByAI = async () => {
         throw new Error('Icon image url not found')
     }
 
-    console.log(`Icon image url: ${iconImageUrl}`)
+    console.log(`Icon image url: ${iconImageUrl}`);
 
-    const fetchedImage = await fetch(iconImageUrl).then((res) => res.blob())
+    const fetchedImage = await fetch(iconImageUrl).then((res) => res.blob());
 
+    fs.writeFile('icon.png', Buffer.from(await fetchedImage.arrayBuffer()), (err) => {
+        if (err) {
+          console.error('Error saving image:', err);
+        } else {
+          console.log('Image saved successfully as outputImage.png');
+        }
+    });
     return {
         ...mainMessage,
         file: fetchedImage,
