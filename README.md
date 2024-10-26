@@ -1,3 +1,6 @@
+# X
+I will update X link here and burn all dev supply when it hit raydium
+
 # Hear Me Out
 
 Tired of the usual AI project hype? So are we.
